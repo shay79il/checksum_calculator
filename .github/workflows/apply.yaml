@@ -1,0 +1,48 @@
+name: Apply
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        type: boolean
+        description: run apply?
+      test:
+        type: boolean
+        description: run test?
+
+
+jobs:
+  apply:
+    name: Apply
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+          aws --version
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ vars.TERRAFORM_VERSION }}
+
+      - name: Install Taskfile
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run apply
+        run: task apply
+
+      - name: Run test
+        if: ${{ github.inputs.test == 'true' }}
+        run: task test
+
