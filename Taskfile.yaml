@@ -17,7 +17,7 @@ tasks:
         SCRIPT_PATH=$(pwd)/scripts/
         TESTS_PATH=$(pwd)/tests/
         BUCKET_NAME=$(terraform -chdir=$TESTS_PATH output -raw bucket_name)
-        sh "$SCRIPT_PATH"/create_test_files.sh $BUCKET_NAME $TESTS_PATH
+        sh "$SCRIPT_PATH"/create_test_files.sh $BUCKET_NAME $SCRIPT_PATH
 
   destroy:
     desc: "Destroy Terraform-managed infrastructure"

@@ -15,7 +15,7 @@ else
 fi
 
 echo "Removing all local files in the pdf_files/ directory"
-rm -rf "$(script_path)"/pdf_files/*
+rm -rf "$script_path"/pdf_files/
 
 if [ $? -eq 0 ]; then
     echo "All local files successfully removed from the pdf_files/ directory"
