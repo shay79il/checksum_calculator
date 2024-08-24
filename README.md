@@ -38,20 +38,24 @@ module "checksum_calculator" {
 }
 ```
 
-1. Run the following Terraform commands:
-```bash
-terraform init
-terraform plan
-terraform apply
+1. Run the following Taskfile commands:
+```taskfile
+task apply
 ```
+
 2. Upload a PDF file to the specified S3 bucket
+```taskfile
+task test
+```
+
 3. Verify that an MD5 checksum file is created
+
 
 ### Cleanup
 
 To destroy the infrastructure and avoid incurring charges, run:
-```bash
-terraform destroy
+```taskfile
+task destroy
 ```
 
 <!-- BEGIN_TF_DOCS -->
