@@ -37,3 +37,4 @@ terraform.rc
 .idea/*
 /TODO
 /.terraform.lock.hcl
+!/modules/lambda/checksum_calculator.zip
