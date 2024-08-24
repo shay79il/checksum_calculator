@@ -10,6 +10,16 @@ uploaded to an AWS S3 bucket and stores it as a separate object in S3.
 - **AWS S3 Bucket**: The primary storage for objects.
 - **AWS Lambda Function**: Automatically calculates the MD5 checksum for each new object.
 
+## Design
+
+While testing 1000 PDF file upload the following design works seamlessly
+![img.png](images/img.png)
+
+If we would like to make it more durable and highly available we can introduce a pub-sub mechanism and event bus (AWS SQS and Event bridge)
+
+TODO: insert diagram with SQS and Event Bridge here
+
+
 ## Prerequisites
 
 - AWS Account with appropriate permissions.
@@ -34,7 +44,7 @@ terraform init
 terraform plan
 terraform apply
 ```
-2. Upload an object to the specified S3 bucket
+2. Upload a PDF file to the specified S3 bucket
 3. Verify that an MD5 checksum file is created
 
 ### Cleanup

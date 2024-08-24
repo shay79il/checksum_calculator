@@ -1,0 +1,30 @@
+version: '3'
+
+
+tasks:
+  apply:
+    desc: "Apply Terraform configuration"
+    cmds:
+      - |
+        TESTS_PATH=$(pwd)/tests/
+        terraform -chdir=$TESTS_PATH init
+        terraform -chdir=$TESTS_PATH apply -auto-approve
+
+  test:
+    desc: "test task: Retrieve bucket name, create test files"
+    cmds:
+      - |
+        SCRIPT_PATH=$(pwd)/scripts/
+        TESTS_PATH=$(pwd)/tests/
+        BUCKET_NAME=$(terraform -chdir=$TESTS_PATH output -raw bucket_name)
+        sh "$SCRIPT_PATH"/create_test_files.sh $BUCKET_NAME $TESTS_PATH
+
+  destroy:
+    desc: "Destroy Terraform-managed infrastructure"
+    cmds:
+      - |
+        SCRIPT_PATH=$(pwd)/scripts/
+        TESTS_PATH=$(pwd)/tests/
+        BUCKET_NAME=$(terraform -chdir=$TESTS_PATH output -raw bucket_name)
+        sh "$SCRIPT_PATH"/cleanup.sh $BUCKET_NAME $SCRIPT_PATH
+        terraform -chdir=$TESTS_PATH apply --destroy --auto-approve
