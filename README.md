@@ -31,7 +31,7 @@ To use this module, include it in your Terraform configuration:
 
 ```hcl
 module "checksum_calculator" {
-  source              = "./checksum_calculator"
+  source              = "github.com/shay79il/checksum_calculator"
   bucket_name         = "your-s3-bucket-name"
   region              = "your-aws-region"
   lambda_role_name    = "your-lambda-role-name"
