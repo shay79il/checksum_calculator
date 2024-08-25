@@ -27,7 +27,14 @@ TODO: insert diagram with SQS and Event Bridge here
 
 ## Usage
 
-To use this module, include it in your Terraform configuration:
+1. Set the AWS environment variables
+
+```bash
+export AWS_ACCESS_KEY_ID="XXXXX"
+export AWS_SECRET_ACCESS_KEY="xxxxxx"
+```
+
+2. include it in your Terraform configuration:
 
 ```hcl
 module "checksum_calculator" {
@@ -38,17 +45,17 @@ module "checksum_calculator" {
 }
 ```
 
-1. Run the following Taskfile commands:
+3. Run the following Taskfile commands:
 ```taskfile
 task apply
 ```
 
-2. Upload a PDF file to the specified S3 bucket
+4. Upload a PDF file to the specified S3 bucket
 ```taskfile
 task test
 ```
 
-3. Verify that an MD5 checksum file is created
+5. Verify that an MD5 checksum file is created
 
 
 ### Cleanup
